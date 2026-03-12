@@ -80,7 +80,7 @@ x = COLS - 1;
 x2 = COLS - 1;
 while(1)
 {
-    mvwaddstr(stdscr,(LINES/2),((COLS-1)/2) - 7, "MUCH TO PONDER");
+    mvwaddstr(stdscr,(LINES/2),((COLS-1)/2) - 6, "MUCH TO PONDER");
 if(s == 1)
 {
 s = 1;
