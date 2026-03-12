@@ -29,8 +29,12 @@ int my_mvaddstr(int y, int x, char *str) {
 }
 
 int main(int ac, char **av) {
-  int x, x2, v, w,s,t,d;
+  int x, x2, v, w,s,t,d,d1;
 
+  if( ac == 2)
+    d1 = atoi(av[1]);
+  else
+    d1 = 5;
   initscr();
   start_color();
   init_pair(3,COLOR_YELLOW,COLOR_BLUE);
@@ -45,14 +49,35 @@ int main(int ac, char **av) {
   scrollok(stdscr, FALSE);
   s = 1;
   t = 0;
-  d = 1;
+  d = d1;
 v = (int)(rand() % LINES);
 w = (int)(rand() % LINES);
 x = COLS - 1;
 x2 = COLS - 1;
+if(ac == 2)
+{
+if(atoi(av[1]) == 0)
+{
+mvwaddstr(stdscr,(LINES/2),((COLS-1)/2) - 6, "NO DUCKS TO SEE");
+    getch();
+    refresh();
+sleep(5);
+  mvcur(0, COLS - 1, LINES - 1, 0);
+  endwin();
+return(0);
+}
+}
 while(d + 1)
 {
     mvwaddstr(stdscr,(LINES/2),((COLS-1)/2) - 6, "MUCH TO PONDER");
+if(d1 == 1)
+{
+    if (add_D51(x,v) == ERR)
+        break;
+    x--;
+}
+else if(d1 % 2)
+{
 if(s == 1 && d)
 {
 s = 1;
@@ -84,6 +109,42 @@ t = 1;
     	t = 0;
     	x2 = COLS - 1;
     }
+}
+}
+else
+{
+if(s == 1 && d+1)
+{
+s = 1;
+    if(x < ((COLS - 1)/2))
+	t = 1;
+    if (add_D51(x,v) == ERR)
+        break;
+    x--;
+    if(x == 0)
+    {
+    	d--;
+    	v = (int)(rand() % LINES);
+    	s = 0;
+    	x = COLS - 1;
+    }
+}
+if(t == 1 && d)
+{
+t = 1;
+    if(x2 < ((COLS - 1)/2))
+        s = 1;
+    if (add_D21(COLS-1-x2,w) == ERR)
+        break;
+    x2--;
+    if(x2 == 0)
+    {
+    	d--;
+    	w = (int)(rand() % LINES);
+    	t = 0;
+    	x2 = COLS - 1;
+    }
+}
 }
     getch();
     refresh();
