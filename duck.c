@@ -67,7 +67,7 @@ sleep(5);
 return(0);
 }
 }
-while(d + 1)
+while(d)
 {
     mvwaddstr(stdscr,(LINES/2),((COLS-1)/2) - 6, "MUCH TO PONDER");
 if(d1 == 1)
@@ -94,7 +94,7 @@ s = 1;
     	x = COLS - 1;
     }
 }
-if(t == 1 && d + 1)
+if(t == 1 && d-1)
 {
 t = 1;
     if(x2 < ((COLS - 1)/2))
@@ -113,7 +113,7 @@ t = 1;
 }
 else
 {
-if(s == 1 && d+1)
+if(s == 1 && d-1)
 {
 s = 1;
     if(x < ((COLS - 1)/2))
