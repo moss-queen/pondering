@@ -11,7 +11,6 @@ int add_D51(int x, int y);
 int add_D21(int x, int y);
 void add_smoke(int y, int x);
 void add_snoke(int y, int x);
-void option(char *str);
 int my_mvaddstr(int y, int x, char *str);
 
 int ACCIDENT = 0;
@@ -29,39 +28,11 @@ int my_mvaddstr(int y, int x, char *str) {
   return OK;
 }
 
-void option(char *str) {
-  extern int ACCIDENT, LOGO, FLY, C51;
+int main(int ac, char **av) {
+  int x, x2, v, w,s,t,d;
 
-  while (*str != '\0') {
-    switch (*str++) {
-    case 'a':
-      ACCIDENT = 1;
-      break;
-    case 'F':
-      FLY = 1;
-      break;
-    case 'l':
-      LOGO = 1;
-      break;
-    case 'c':
-      C51 = 1;
-      break;
-    default:
-      break;
-    }
-  }
-}
-
-int main(int argc, char *argv[]) {
-  int x, x2, i,v, w,s,t;
-
-  for (i = 1; i < argc; ++i) {
-    if (*argv[i] == '-') {
-      option(argv[i] + 1);
-    }
-  }
   initscr();
-    start_color();
+  start_color();
   init_pair(3,COLOR_YELLOW,COLOR_BLUE);
   bkgd(COLOR_PAIR(3));
   refresh();
@@ -74,14 +45,15 @@ int main(int argc, char *argv[]) {
   scrollok(stdscr, FALSE);
   s = 1;
   t = 0;
+  d = 1;
 v = (int)(rand() % LINES);
 w = (int)(rand() % LINES);
 x = COLS - 1;
 x2 = COLS - 1;
-while(1)
+while(d + 1)
 {
     mvwaddstr(stdscr,(LINES/2),((COLS-1)/2) - 6, "MUCH TO PONDER");
-if(s == 1)
+if(s == 1 && d)
 {
 s = 1;
     if(x < ((COLS - 1)/2))
@@ -91,12 +63,13 @@ s = 1;
     x--;
     if(x == 0)
     {
+    	d--;
     	v = (int)(rand() % LINES);
     	s = 0;
     	x = COLS - 1;
     }
 }
-if(t == 1)
+if(t == 1 && d + 1)
 {
 t = 1;
     if(x2 < ((COLS - 1)/2))
@@ -106,6 +79,7 @@ t = 1;
     x2--;
     if(x2 == 0)
     {
+    	d--;
     	w = (int)(rand() % LINES);
     	t = 0;
     	x2 = COLS - 1;
